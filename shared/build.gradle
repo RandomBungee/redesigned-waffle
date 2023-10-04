@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'de.jokileda.core.shared'
+version '0.0.0'
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly(rootProject.project(":api-shared"))
+    compileOnly(rootProject.project(":api-spigot"))
+    compileOnly(rootProject.project(":api-proxy"))
+    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.8'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+}
+
+test {
+    useJUnitPlatform()
+}

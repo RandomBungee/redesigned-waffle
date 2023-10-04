@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+}
+
+
+group 'de.jokileda.core.spigot'
+version '0.0.0'
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
+
+repositories {
+    mavenCentral()
+    maven { url = uri("https://repo.papermc.io/repository/maven-public/") }
+}
+dependencies {
+    implementation(rootProject.project(":api-shared"))
+    implementation(rootProject.project(":shared"))
+    implementation(rootProject.project(":api-spigot"))
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'de.jokileda.core.spigot.Core'
+    }
+    configurations = [project.configurations.runtimeClasspath]
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+    mergeServiceFiles()
+}

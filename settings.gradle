@@ -1,0 +1,11 @@
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version("0.5.0")
+}
+
+rootProject.name = 'core'
+include 'api-spigot'
+include 'api-proxy'
+include 'api-shared'
+include 'shared'
+include 'spigot-core'
+include 'proxy-core'
